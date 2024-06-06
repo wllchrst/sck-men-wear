@@ -30,7 +30,6 @@ export default function App() {
   return (
     <ProviderWrapper>
       <PageLayout>
-        something
         <Routes>
           {/* No need middleware */}
           <Route path="/login" element={<Login />} />

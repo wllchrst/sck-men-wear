@@ -12,7 +12,7 @@ export default function NavigationLink({
   return (
     <ChakraLink
       bg={"none"}
-      paddingY={3}
+      paddingY={0}
       as={ReactRouterLink}
       rounded={"md"}
       _hover={{
