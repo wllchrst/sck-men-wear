@@ -31,6 +31,7 @@ export default function NavbarLinks({ links }: I) {
                       bg: "transparent",
                     }}
                     className="flex justify-center items-center"
+                    lineHeight={'unset'}
                   >
                     {page.pageLink.display}
                   </MenuButton>

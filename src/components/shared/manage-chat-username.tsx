@@ -13,6 +13,9 @@ export default function ManageChatUsername({
     <Box
       className="flex p-2 flex-col"
       borderBottom={"1px solid black"}
+      _hover={{
+        backgroundColor: "gray.200"
+      }}
       onClick={() => {
         setCurrentUsername(username);
       }}

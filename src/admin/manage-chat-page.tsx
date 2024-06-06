@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function ManageChat() {
   const { chats, isLoading } = useManageChat();
   const [currentUsername, setCurrentUsername] = useState("");
-  
+
   if (isLoading) return <Loading></Loading>;
 
   return (
@@ -31,7 +31,7 @@ export default function ManageChat() {
       </Box>
       <Box height={"100%"} width={"75%"}>
         {currentUsername == "" ? (
-          <ManageChatBox chats={null} email=""/>
+          <ManageChatBox chats={null} email="" />
         ) : (
           <ManageChatBox chats={chats[currentUsername]} email={currentUsername} />
         )}

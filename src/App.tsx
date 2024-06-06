@@ -34,7 +34,6 @@ export default function App() {
           {/* No need middleware */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
           {/* Customer Pages with Middleware */}
           <Route
             path="/"
