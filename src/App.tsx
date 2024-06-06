@@ -30,6 +30,7 @@ export default function App() {
   return (
     <ProviderWrapper>
       <PageLayout>
+        something
         <Routes>
           {/* No need middleware */}
           <Route path="/login" element={<Login />} />
@@ -62,7 +63,6 @@ export default function App() {
           />
           {/* Admin Pages with Middleware */}
 
-          
           <Route
             path="/manage-promotion"
             element={
