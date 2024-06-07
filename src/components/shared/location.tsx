@@ -6,7 +6,7 @@ import locationImage from "../../assets/skj-location-image.png";
 
 export default function Location() {
   return (
-    <div className=" my-32">
+    <div className=" mb-32 mt-16">
       <div className="flex justify-center mb-12 flex-col items-center gap-5">
         <Text
           fontWeight={"light"}

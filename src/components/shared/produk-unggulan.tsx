@@ -6,7 +6,7 @@ export default function ProdukUnggulan() {
   const { products, isLoading } = useFetchTopProducts();
 
   return (
-    <div>
+    <div className="mb-16">
       <div className="flex justify-center mb-10 flex-col items-center gap-5">
         <Text
           fontWeight={"light"}

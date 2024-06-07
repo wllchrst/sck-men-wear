@@ -3,13 +3,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAFw7a99elULc-CuGQWqImBGI8d6ve2i60",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "sckmenwear.firebaseapp.com",
   projectId: "sckmenwear",
   storageBucket: "sckmenwear.appspot.com",
