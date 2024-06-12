@@ -2,6 +2,7 @@ import { Skeleton, Stack, Text } from "@chakra-ui/react";
 import CreateProduct from "../components/shared/create-product";
 import ProductsView from "../components/shared/products-view";
 import CreateCategory from "../components/shared/create-category";
+import UpdateProductsCSV from "../components/shared/update-products-csv";
 
 export default function ManageProduct() {
   return (
@@ -12,6 +13,7 @@ export default function ManageProduct() {
       <div className="flex gap-3">
         <CreateProduct />
         <CreateCategory />
+        <UpdateProductsCSV/>
       </div>
       <ProductsView withFilter={true} isAdmin={true} />
     </div>

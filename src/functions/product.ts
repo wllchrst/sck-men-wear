@@ -65,6 +65,8 @@ function validateProductCreation(product: Product): {
   };
 }
 
+
+
 async function createProduct(product: Product) {
   const result = await helper.create(productCollection, product);
   return result;
