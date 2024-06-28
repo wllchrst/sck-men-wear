@@ -9,9 +9,10 @@ export interface Product {
   
   discount: number;
   rating: number;
-
   piecesPerPrice: number;
   size: string;
+  
+  // product status
   onPromo: boolean;
   onSale: boolean;
   isNew: boolean;

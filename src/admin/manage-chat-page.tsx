@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import useManageChat from "../hooks/use-manage-chat";
 import Loading from "../components/global/loading";
 import ManageChatUsername from "../components/shared/manage-chat-username";
@@ -18,7 +18,12 @@ export default function ManageChat() {
       height={"80vh"}
       border={"1px solid black"}
     >
-      <Box height={"100%"} borderRight={'1px solid black'} width={"25%"} overflowY={"scroll"}>
+      <Box
+        height={"100%"}
+        borderRight={"1px solid black"}
+        width={"25%"}
+        overflowY={"scroll"}
+      >
         {Object.entries(chats).map(([username, _], key) => (
           <div key={key}>
             <ManageChatUsername
@@ -33,7 +38,10 @@ export default function ManageChat() {
         {currentUsername == "" ? (
           <ManageChatBox chats={null} email="" />
         ) : (
-          <ManageChatBox chats={chats[currentUsername]} email={currentUsername} />
+          <ManageChatBox
+            chats={chats[currentUsername]}
+            email={currentUsername}
+          />
         )}
       </Box>
     </Box>
