@@ -1,31 +1,40 @@
 import { User } from "../interfaces/user-interface";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import { auth, userCollection } from "../settings/firebase-config";
+import { userCollection } from "../settings/firebase-config";
 import FirebaseHelper from "../services/firebase-helper";
 import { getDocs, query, where } from "firebase/firestore";
+import { IResponse, createResponse } from "../interfaces/response-interface";
+import UserService from "../services/user-service";
 
 const helper = new FirebaseHelper();
 
-async function userRegister(user: User) {
+function validateUserCreation(user: User): IResponse {
+  let message = ""
+
+  if (user.email == "") message = "Email cannot be empty"
+  else if (user.password) message = "Password cannot be empty"
+
+  const response: IResponse = {
+    message: message,
+    success: message == ""
+  }
+
+  return response
+}
+
+async function userRegister(user: User): Promise<IResponse> {
   try {
+    const validationResult = validateUserCreation(user)
+
+    if (!validationResult.success) return validationResult
+
     const result = helper.create(userCollection, user);
 
-    if (!result) throw "adding docs to user failed";
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      user.email,
-      user.password
-    );
-    console.log(userCredential);
+    if (!result) return createResponse("Gagal membuat akun", result)
 
-    return true;
+    return createResponse("Sukses membuat akun", true)
   } catch (error) {
     console.log(error);
-    return false;
+    return createResponse("Gagal membuat akun", false)
   }
 }
 
@@ -46,17 +55,21 @@ async function getUser(email: string) {
   }
 }
 
-async function userLogin(user: User) {
+function userLogout() {
+
+}
+
+async function userLogin(user: User): Promise<User | null> {
   try {
-    signInWithEmailAndPassword(auth, user.email, user.password);
-    return true;
+    const loginResult = await UserService.LoginUser(user.email)
+
+    console.log(loginResult)
+
+    return loginResult
   } catch (error) {
-    return false;
+    console.log(error)
+    return null
   }
 }
 
-async function userLogout() {
-  signOut(auth);
-}
-
-export { userRegister, userLogin, userLogout, getUser };
+export { userRegister, userLogin, getUser, userLogout };

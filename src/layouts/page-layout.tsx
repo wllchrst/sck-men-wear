@@ -1,28 +1,21 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { getUserContext } from "../context/user-context";
 import { useEffect } from "react";
-import { auth } from "../settings/firebase-config";
-import { getUser } from "../functions/user";
 import { IChildren } from "../interfaces/children-interface";
+import UserService from "../services/user-service";
 
 export default function PageLayout({ children }: IChildren) {
   const { setCurrentUser, setLoggedIn } = getUserContext();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser != null && currentUser.email != null) {
-        getUser(currentUser.email).then((user) => {
-          if (user != null) {
-            setCurrentUser(user);
-          } else {
-            setLoggedIn(false);
-          }
-        });
-      }
-    });
+    if (UserService.userEmail == "") return
 
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
+    UserService.getUserInformation().then((userInformation) => {
+      if (userInformation == null) return
+
+      setCurrentUser(userInformation)
+      setLoggedIn(true)
+    })
   }, []);
+
   return <>{children}</>;
 }

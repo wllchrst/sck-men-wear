@@ -39,7 +39,7 @@ export default function Navbar() {
             </NavigationLink>
           </HStack>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            <NavbarLinks links={pages}/>
+            <NavbarLinks links={pages} />
             {isLoggedIn && user ? (
               <div className="justify-center items-center gap-3 flex">
                 <Text fontWeight={"bold"}>{user.email}</Text>

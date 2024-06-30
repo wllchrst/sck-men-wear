@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { changeHandle } from "../services/helper";
 import { userLogin } from "../functions/user";
 import { User } from "../interfaces/user-interface";
+import UserService from "../services/user-service";
 
 export default function Login() {
   const [user, setUser] = useState({} as User);
@@ -26,6 +27,8 @@ export default function Login() {
       else toast.failedToast("Login gagal");
     });
   }
+
+  console.log(UserService.userEmail)
 
   useEffect(() => {
     console.log(userContext.isLoggedIn);
