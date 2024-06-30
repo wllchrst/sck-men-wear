@@ -7,6 +7,7 @@ const userContext = createContext({} as IUserContext);
 
 export default function UserContextProvider({ children }: IChildren) {
   const [user, setUser] = useState({} as User);
+  const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function setCurrentUser(user: User) {
@@ -20,7 +21,11 @@ export default function UserContextProvider({ children }: IChildren) {
     setIsLoggedIn(loggedIn);
   }
 
-  const data = { user, setCurrentUser, isLoggedIn, setLoggedIn };
+  function setCurrentUserEmail(currentUserEmail: string) {
+    setUserEmail(currentUserEmail)
+  }
+
+  const data = { user, setCurrentUser, isLoggedIn, setLoggedIn, userEmail, setCurrentUserEmail };
 
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }

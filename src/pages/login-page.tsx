@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Input } from "@chakra-ui/react";
 import loginPageBackground from "../assets/login-page-background.gif";
 import Link from "../components/shared/link";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -17,13 +17,18 @@ export default function Login() {
   const toast = new ToastBuilder("Login");
   const userContext = getUserContext();
   const navigation = useNavigate();
+  const { setCurrentUserEmail } = getUserContext()
 
   function buttonHandle() {
     console.log(user);
     toast.infoToast("Mohon tunggu sebentar");
     userLogin(user).then((result) => {
       toast.closeAllToast();
-      if (result) toast.successToast("Login sukses");
+      if (result) {
+        toast.successToast("Login suskes mohon tunggu sebentar")
+        setCurrentUserEmail(user.email)
+        navigation("/")
+      }
       else toast.failedToast("Login gagal");
     });
   }
