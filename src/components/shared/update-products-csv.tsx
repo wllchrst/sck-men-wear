@@ -1,28 +1,25 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    useDisclosure,
-    Input,
-  } from '@chakra-ui/react'
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  Input,
+} from "@chakra-ui/react";
 
-import Papa from 'papaparse'
-import { useState } from 'react';
+import Papa from "papaparse";
+import { ICSVRow } from "../../interfaces/csv-interface";
+import useUpdateCSV from "../../hooks/use-update-csv";
+import UpdateProductCSVHandler from "../../hooks/use-update-csv";
 
-interface CSVRow {
-    [key: string]: string;
-}
-  
-
-export default function UpdateProductsCSV () {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const [csvData, setCsvData] = useState<CSVRow[]>([]);
+export default function UpdateProductsCSV() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const handler = new UpdateProductCSVHandler();
+  const { setCsvProducts, update } = handler.useUpdateCSV();
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -31,11 +28,10 @@ export default function UpdateProductsCSV () {
       const reader = new FileReader();
       reader.onload = () => {
         const text = reader.result as string;
-        Papa.parse<CSVRow>(text, {
+        Papa.parse<ICSVRow>(text, {
           header: true,
           complete: (result) => {
-            // setCsvData(result.data);
-            console.log(result.data);
+            setCsvProducts(result.data);
           },
         });
       };
@@ -43,24 +39,31 @@ export default function UpdateProductsCSV () {
     }
   };
 
-    return <>
-        <Button onClick={onOpen} colorScheme='teal'>Ubah Produk</Button>
+  return (
+    <>
+      <Button onClick={onOpen} colorScheme="teal">
+        Ubah Produk
+      </Button>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-            <ModalHeader>Masukan File </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-                <Input type='file' accept='.csv' onChange={handleFileUpload}/>
-            </ModalBody>
+          <ModalHeader>Masukan File </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div className="flex flex-row gap-3 items-center justify-center">
+              <Input type="file" accept=".csv" onChange={handleFileUpload} />
+              <Button onClick={() => update()}>Update</Button>
+            </div>
+          </ModalBody>
 
-            <ModalFooter>
-                <Button colorScheme='blue' onClick={onClose}>
-                    Close
-                </Button>
-            </ModalFooter>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
         </ModalContent>
-        </Modal>
-  </>
+      </Modal>
+    </>
+  );
 }

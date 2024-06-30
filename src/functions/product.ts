@@ -14,7 +14,10 @@ function validateProductCreation(product: Product): {
     errors.push("Invalid id: must be a non-empty string.");
   }
 
-  if (typeof product.name !== "string" || product.name.trim() === "") {
+  if (
+    typeof product.productName !== "string" ||
+    product.productName.trim() === ""
+  ) {
     errors.push("Invalid name: must be a non-empty string.");
   }
 
@@ -65,8 +68,6 @@ function validateProductCreation(product: Product): {
   };
 }
 
-
-
 async function createProduct(product: Product) {
   const result = await helper.create(productCollection, product);
   return result;
@@ -78,5 +79,7 @@ async function deleteProduct(id: string) {
 }
 
 async function updateProduct(id: string, product: Product) {}
+
+
 
 export { createProduct, deleteProduct, validateProductCreation };
