@@ -10,13 +10,14 @@ interface I {
 
 export default function NavbarLinks({ links }: I) {
   const { user } = getUserContext()
+
   return <>
     {links.map((page, key) => (
-      <div key={key}>
-        {!showingNavbar(page, user) ? <></> :
+      <div key={key} className={!showingNavbar(page, user) ? "hidden" : ""}>
+        {!showingNavbar(page, user) ? null :
           <div key={key} className="flex justify-between items-center">
             {page.subLinks.length > 0 ? (
-              <>
+              <div>
                 <Menu>
                   <MenuButton
                     as={Button}
@@ -47,7 +48,7 @@ export default function NavbarLinks({ links }: I) {
                     ))}
                   </MenuList>
                 </Menu>
-              </>
+              </div>
             ) : (
               <NavigationLink link={page.pageLink.link} key={key}>
                 {page.pageLink.display}

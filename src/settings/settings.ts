@@ -13,4 +13,5 @@ export class Settings {
 
   static ADMIN = "admin"
   static CUSTOMER = "customer"
+  static userEmailCookie = "user-email"
 }

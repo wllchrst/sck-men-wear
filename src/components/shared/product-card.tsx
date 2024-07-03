@@ -33,7 +33,7 @@ export default function ProductCard({ product, isAdmin, deleteHandle }: Props) {
                 textDecor: "underline",
               }}
             >
-              {product.name}
+              {product.productName}
             </Heading>
             <Text noOfLines={3} height={'70px'}>
               {product.description}

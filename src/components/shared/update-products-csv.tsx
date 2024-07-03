@@ -13,7 +13,6 @@ import {
 
 import Papa from "papaparse";
 import { ICSVRow } from "../../interfaces/csv-interface";
-import useUpdateCSV from "../../hooks/use-update-csv";
 import UpdateProductCSVHandler from "../../hooks/use-update-csv";
 
 export default function UpdateProductsCSV() {

@@ -28,6 +28,7 @@ export default function Login() {
         toast.successToast("Login suskes mohon tunggu sebentar")
         setCurrentUserEmail(user.email)
         navigation("/")
+        window.location.reload()
       }
       else toast.failedToast("Login gagal");
     });

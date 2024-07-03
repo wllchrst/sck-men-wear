@@ -29,8 +29,10 @@ const productCollection = collection(db, "product");
 const categoryCollection = collection(db, "category");
 const userCollection = collection(db, "user");
 const chatWithAdminCollection = collection(db, "chatWithAdmin");
+const subCategoryCollection = collection(db, "sub-category");
 
 export {
+  subCategoryCollection,
   app,
   storage,
   promotionCollection,

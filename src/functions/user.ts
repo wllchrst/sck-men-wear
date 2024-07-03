@@ -4,6 +4,8 @@ import FirebaseHelper from "../services/firebase-helper";
 import { getDocs, query, where } from "firebase/firestore";
 import { IResponse, createResponse } from "../interfaces/response-interface";
 import UserService from "../services/user-service";
+import Cookies from "js-cookie";
+import { Settings } from "../settings/settings";
 
 const helper = new FirebaseHelper();
 
@@ -56,12 +58,15 @@ async function getUser(email: string) {
 }
 
 function userLogout() {
-
+  Cookies.remove(Settings.userEmailCookie)
 }
 
 async function userLogin(user: User): Promise<User | null> {
   try {
     const loginResult = await UserService.LoginUser(user.email)
+    if(loginResult == null) return null
+
+    Cookies.set(Settings.userEmailCookie, loginResult.email)
 
     console.log(loginResult)
 
