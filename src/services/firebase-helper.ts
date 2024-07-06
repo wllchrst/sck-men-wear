@@ -24,6 +24,21 @@ export default class FirebaseHelper<T> {
     }
   }
 
+  async deleteAll(
+    collection: CollectionReference<DocumentData, DocumentData>
+  ): Promise<boolean> {
+    try {
+      const snapshot = await getDocs(collection);
+      for(const doc of snapshot.docs) {
+        await deleteDoc(doc.ref)
+      }
+      return true
+    } catch (error) {
+      console.log(error);
+      return false
+    }
+  }
+
   async getById(
     collection: CollectionReference<DocumentData, DocumentData>,
     id: string
@@ -39,6 +54,23 @@ export default class FirebaseHelper<T> {
       return null;
     }
   }
+
+  async getByColumn(
+    collection: CollectionReference<DocumentData, DocumentData>,
+    targetColumn: string, target: string
+  ): Promise<T | null> {
+    try {
+      const q = query(collection, where(targetColumn, "==", target));
+      const snapshot = await getDocs(q);
+
+      if (snapshot.docs.length != 1) return snapshot.docs[0].data() as T;
+      return null;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
 
   async getDataRef(
     collection: CollectionReference<DocumentData, DocumentData>,

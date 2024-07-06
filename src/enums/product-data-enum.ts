@@ -1,4 +1,4 @@
-enum PRODUCT_DATA {
+export enum PRODUCT_DATA {
   productName = "PRODUK",
   color = "WARNA",
   piecesPerPrice = "BANYAK_PCS",

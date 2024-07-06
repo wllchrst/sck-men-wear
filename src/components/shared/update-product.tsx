@@ -55,12 +55,12 @@ export default function UpdateProduct({ product }: I) {
           <CardBody>
             <Image
               src={product.pictureLink}
-              alt={product.name}
+              alt={product.productName}
               borderRadius="lg"
             />
             <Stack mt="6" spacing="3">
               <Editable
-                defaultValue={product.name}
+                defaultValue={product.productName}
                 fontWeight={"bold"}
                 fontSize={"x-large"}
               >
@@ -81,17 +81,17 @@ export default function UpdateProduct({ product }: I) {
                 className="flex gap-1 items-center"
               >
                 Rp.
-                <Editable defaultValue={product.price.toString()}>
-                  <EditablePreview />
+                <Editable defaultValue={product.productItems[0].price.toString()}>
+                  {/* <EditablePreview />
                   <EditableInput
                     type="number"
                     onChange={(e) =>
                       setProductUpdated({
                         ...productUpdated,
-                        price: parseFloat(e.target.value),
+                        productItems[0].price: parseFloat(e.target.value),
                       })
                     }
-                  />
+                  /> */}
                 </Editable>
               </Text>
             </Stack>

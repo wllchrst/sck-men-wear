@@ -48,7 +48,7 @@ export default function ManageChatBox({ chats, email }: I) {
 
   return (
     <Box className="flex flex-col justify-between gap-2 rounded-md" height={"100%"}>
-      <Box className="flex px-4 py-2" border={'1px solid black'}>{email}</Box>
+      <Box className="flex px-4 py-2" borderBottom={'1px solid black'}>{email}</Box>
       <Box
         height={"100%"}
         className="rounded-md flex flex-col-reverse gap-1 p-2"

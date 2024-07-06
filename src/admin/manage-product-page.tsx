@@ -3,6 +3,7 @@ import CreateProduct from "../components/shared/create-product";
 import ProductsView from "../components/shared/products-view";
 import CreateCategory from "../components/shared/create-category";
 import UpdateProductsCSV from "../components/shared/update-products-csv";
+import DeleteAllProduct from "../components/shared/delete-all-product";
 
 export default function ManageProduct() {
   return (
@@ -14,6 +15,7 @@ export default function ManageProduct() {
         <CreateProduct />
         <CreateCategory />
         <UpdateProductsCSV/>
+        <DeleteAllProduct/>
       </div>
       <ProductsView withFilter={true} isAdmin={true} />
     </div>

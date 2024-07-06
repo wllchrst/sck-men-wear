@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../interfaces/product-interface";
-import { onSnapshot, query } from "firebase/firestore";
+import { collectionGroup, onSnapshot, query } from "firebase/firestore";
 import { productCollection } from "../settings/firebase-config";
 
 export default function useFetchProducts() {

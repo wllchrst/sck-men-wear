@@ -1,9 +1,11 @@
+import { IProductItem } from "./product-item-interface";
+
 export interface Product {
   id: string;
   productName: string;
   description: string;
   pictureLink: string;
-  price: number;
+
   color: string;
 
   categoryId: string;
@@ -12,7 +14,7 @@ export interface Product {
   discount: number;
   rating: number;
   piecesPerPrice: number;
-  size: string;
+  productItems : IProductItem[]
 
   // product status
   onPromo: boolean;

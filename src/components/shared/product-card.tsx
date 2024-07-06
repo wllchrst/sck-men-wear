@@ -13,17 +13,20 @@ import {
 import { Product } from "../../interfaces/product-interface";
 import UpdateProduct from "./update-product";
 import { Settings } from "../../settings/settings";
+import ProductCardFloating from "./product-card-floating";
 
 interface Props {
   product: Product;
   isAdmin: boolean;
   deleteHandle: (product: Product) => void;
 }
+
 export default function ProductCard({ product, isAdmin, deleteHandle }: Props) {
   return (
     <div>
-      <Card>
-        <CardBody>
+      <Card className="relative">
+        <CardBody border={''}>
+          <ProductCardFloating product={product}/>
           <Image src={product.pictureLink} />
           <Stack mt="6" spacing="3">
             <Heading
@@ -45,7 +48,7 @@ export default function ProductCard({ product, isAdmin, deleteHandle }: Props) {
                 fontSize="2xl"
                 className="flex gap-2 items-center"
               >
-                Rp.{product.price}
+                Rp.{product.productItems[0].price}
                 <Badge colorScheme="cyan">{product.rating}</Badge>
               </Text>
               {isAdmin && (

@@ -18,7 +18,11 @@ import UpdateProductCSVHandler from "../../hooks/use-update-csv";
 export default function UpdateProductsCSV() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handler = new UpdateProductCSVHandler();
-  const { setCsvProducts, update } = handler.useUpdateCSV();
+  const { setCsvProducts } = handler.useUpdateCSV();
+
+  function update(){
+    handler.update()
+  }
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
