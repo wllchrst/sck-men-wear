@@ -25,7 +25,9 @@ export default function useFetchProductsFiltered() {
         filter.categoriesId != ""
       )
         passValidation = false;
-
+      else if(!product.productName.toLowerCase().includes(filter.search.toLowerCase())) 
+        passValidation = false
+      
       return passValidation;
     });
 
@@ -34,6 +36,7 @@ export default function useFetchProductsFiltered() {
 
   useEffect(() => {
     filterProduct();
+    console.log(filter)
   }, [filter, isLoading]);
 
   return { filteredProducts, isLoading, resetFilter, setFilter };

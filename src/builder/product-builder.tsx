@@ -36,6 +36,10 @@ export function productBuilder(
   }
 }
 
+function getProdcut(){ 
+
+}
+
 function getFloat(rating: string) {
   rating = rating.trim().replace(",", ".").replace("%", "");
   console.log("rating " + rating);

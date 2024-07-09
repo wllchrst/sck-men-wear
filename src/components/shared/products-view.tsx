@@ -1,13 +1,5 @@
 import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  Flex,
   Grid,
-  Heading,
-  Stack,
-  Text,
 } from "@chakra-ui/react";
 import useFetchProducts from "../../hooks/use-fetch-products";
 import Loading from "../global/loading";

@@ -13,5 +13,7 @@ export default function ProductDetailPage() {
     query(productCollection, where("id", "==", id))
   );
   if (isLoading || data == null) return <Loading />;
-  return <div>{data.name}</div>;
+  return <div>{data.productName}</div>;
 }
+
+
