@@ -14,4 +14,5 @@ export class Settings {
   static ADMIN = "admin"
   static CUSTOMER = "customer"
   static userEmailCookie = "user-email"
+  static LIMIT_FETCH_PRODUCT = 100; // for debug only.
 }

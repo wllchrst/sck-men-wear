@@ -29,13 +29,13 @@ export default class FirebaseHelper<T> {
   ): Promise<boolean> {
     try {
       const snapshot = await getDocs(collection);
-      for(const doc of snapshot.docs) {
-        await deleteDoc(doc.ref)
+      for (const doc of snapshot.docs) {
+        await deleteDoc(doc.ref);
       }
-      return true
+      return true;
     } catch (error) {
       console.log(error);
-      return false
+      return false;
     }
   }
 
@@ -57,20 +57,20 @@ export default class FirebaseHelper<T> {
 
   async getByColumn(
     collection: CollectionReference<DocumentData, DocumentData>,
-    targetColumn: string, target: string
+    targetColumn: string,
+    target: string
   ): Promise<T | null> {
     try {
       const q = query(collection, where(targetColumn, "==", target));
       const snapshot = await getDocs(q);
 
-      if (snapshot.docs.length != 1) return snapshot.docs[0].data() as T;
+      if (snapshot.docs.length <= 0) return snapshot.docs[0].data() as T;
       return null;
     } catch (error) {
       console.log(error);
       return null;
     }
   }
-
 
   async getDataRef(
     collection: CollectionReference<DocumentData, DocumentData>,

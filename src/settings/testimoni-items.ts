@@ -8,11 +8,9 @@ testimoniItem.push(first);
 
 for (let i = 0; i < itemAmount; i++) {
   const imagePath = `../assets/testimoni/${i + 1}.png`;
-  const image = await import(imagePath);
+  const image = await import(/* @vite-ignore */ imagePath);
 
   testimoniItem.push(image.default);
 }
-
-console.log(testimoniItem);
 
 export { testimoniItem };

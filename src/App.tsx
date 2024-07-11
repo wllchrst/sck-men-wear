@@ -12,6 +12,7 @@ import ProviderWrapper from "./components/shared/provider-wrapper";
 import PageLayout from "./layouts/page-layout";
 import AdminMiddleware from "./middleware/admin-middleware";
 import ManageChat from "./admin/manage-chat-page";
+import ProductDetailPage from "./pages/product-detail-page";
 
 // 1. tambahin link tree buat contact langsung ✅
 // 2. location nya. ✅
@@ -56,6 +57,14 @@ export default function App() {
             element={
               <MainLayout>
                 <AboutUs />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/products/:id"
+            element={
+              <MainLayout>
+                <ProductDetailPage/>
               </MainLayout>
             }
           />

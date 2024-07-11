@@ -13,8 +13,7 @@ export interface Product {
 
   discount: number;
   rating: number;
-  piecesPerPrice: number;
-  productItems : IProductItem[]
+  productItems: IProductItem[];
 
   // product status
   onPromo: boolean;

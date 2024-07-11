@@ -17,11 +17,15 @@ export default function ChatBox() {
   const toast = new ToastBuilder("Chat with admin");
   const fetchBuilder = new FetchBuilder<IChat>();
 
-  const qry = query(chatWithAdminCollection, orderBy('createdAt', 'desc'), where('email', '==' , user?.email))
-  
-  const {data, isLoading} = fetchBuilder.getAll(qry);
+  const qry = query(
+    chatWithAdminCollection,
+    orderBy("createdAt", "desc"),
+    where("email", "==", user?.email)
+  );
 
-  console.log(`${data}, ${isLoading}`)
+  const { data, isLoading } = fetchBuilder.getAll(qry);
+
+  console.log(`${data}, ${isLoading}`);
 
   function uploadChatHandle() {
     if (user == null) {
@@ -57,36 +61,33 @@ export default function ChatBox() {
   return (
     <Box border={""} className="h-full flex flex-col gap-1 w-full">
       <Box
-        border={"1px solid black"}
-        className="flex rounded-md"
+        className="flex rounded-md bg-blue-400"
         width={"100%"}
         height={"90%"}
       >
         <Box
-          className="flex flex-col-reverse w-full p-3 gap-4 h-full"
-          border={"1px solid black"}
-          overflow={'hidden'}
-          overflowY={'scroll'}
+          className="flex flex-col-reverse w-full m-3 gap-4 h-full"
+          backgroundColor={"white"}
+          overflow={"hidden"}
+          overflowY={"scroll"}
         >
           {data.map((chat, index) => (
             <div key={index}>
-              {chat.isAdmin ? 
+              {chat.isAdmin ? (
                 <div className="flex justify-start">
-                    <div className="p-2 bg-slate-800 rounded-md">
-                    <p className="text-white">
-                    {chat.message}
-                    </p>
+                  <div className="p-2 bg-slate-800 rounded-md">
+                    <p className="text-white">{chat.message}</p>
                   </div>
-                </div>  
-                : 
+                </div>
+              ) : (
                 <div className="flex justify-end ">
                   <div className="p-2 bg-blue-300 rounded-md">
                     <p className="text-black">{chat.message}</p>
                   </div>
                 </div>
-                }
-                </div>
-            ))}
+              )}
+            </div>
+          ))}
         </Box>
       </Box>
       <HStack height={"10%"} justifyContent={"center"} alignItems={"center"}>

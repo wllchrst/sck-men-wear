@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
 } from "@chakra-ui/react";
 import useFetchProducts from "../../hooks/use-fetch-products";
@@ -50,6 +51,7 @@ export default function ProductsView({ isAdmin }: Props) {
           </>
         ))}
       </Grid>
+      <Box>Somehting</Box>
     </>
   );
 }

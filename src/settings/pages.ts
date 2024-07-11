@@ -31,36 +31,36 @@ const pages: NavbarLink[] = [
   },
 ];
 
-const categories: Category[] = await categoryHelper.getAll(categoryCollection)
-const subCategories : SubCategory[] = await subCategoryHelper.getAll(subCategoryCollection)
+// const categories: Category[] = await categoryHelper.getAll(categoryCollection)
+// const subCategories : SubCategory[] = await subCategoryHelper.getAll(subCategoryCollection)
 
-const map: { [key:string]: boolean } = {};
+// const map: { [key:string]: boolean } = {};
 
-for(const category of categories) {
-  if(map[category.id] != undefined) continue
-  map[category.id] = true
-  const navLink: NavbarLink = {
-    pageLink: {
-      adminAuth: false,
-      display: category.name,
-      link: "#"
-    },
-    subLinks: []
-  }
+// for(const category of categories) {
+//   if(map[category.id] != undefined) continue
+//   map[category.id] = true
+//   const navLink: NavbarLink = {
+//     pageLink: {
+//       adminAuth: false,
+//       display: category.name,
+//       link: "#"
+//     },
+//     subLinks: []
+//   }
 
-  for(const subCategory of subCategories) {
-    if(subCategory.categoryId == category.id) {
-      const pageLink: PageLink = {
-        adminAuth: false,
-        display: subCategory.name,
-        link: "#"
-      }
-      navLink.subLinks.push(pageLink)
-    }
-  }
+//   for(const subCategory of subCategories) {
+//     if(subCategory.categoryId == category.id) {
+//       const pageLink: PageLink = {
+//         adminAuth: false,
+//         display: subCategory.name,
+//         link: "#"
+//       }
+//       navLink.subLinks.push(pageLink)
+//     }
+//   }
 
-  pages.push(navLink)
-}
+//   pages.push(navLink)
+// }
 
 
 export {pages}

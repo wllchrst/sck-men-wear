@@ -19,7 +19,9 @@ export default class UpdateProductCSVHandler {
   subCategoryFirebaseHelper: FirebaseHelper<SubCategory>;
   categoryList: Category[] = [];
   subCategoryList: SubCategory[] = [];
-  csvRow: ICSVRow[] = []
+  csvRow: ICSVRow[] = [];
+  products: Map<string, Product> = new Map();
+  names: Map<string, boolean> = new Map();
 
   constructor() {
     this.firebaseHelper = new FirebaseHelper();
@@ -31,16 +33,16 @@ export default class UpdateProductCSVHandler {
     const [csvProducts, setCsvProducts] = useState<ICSVRow[]>([]);
 
     useEffect(() => {
-      this.csvRow = csvProducts
+      this.csvRow = csvProducts;
     }, [csvProducts]);
 
     return { setCsvProducts };
   }
 
-  async update(){
-    if(this.csvRow.length <= 0) alert("Upload CSV Terlebih Dahulu")
+  async update() {
+    if (this.csvRow.length <= 0) alert("Upload CSV Terlebih Dahulu");
 
-    this.uploadData(this.csvRow)
+    this.uploadData(this.csvRow);
   }
 
   async uploadData(listOfData: ICSVRow[]): Promise<boolean> {
@@ -55,53 +57,72 @@ export default class UpdateProductCSVHandler {
       const subCategoryData = data[PRODUCT_DATA.sub_category];
 
       const category = await this.uploadCategory(categoryData);
-      const subCategory = await this.uploadSubCategory(subCategoryData, category.id);
 
-      this.categoryList.push(category)
-      this.subCategoryList.push(subCategory)
+      if(category == null) continue;
+      const subCategory = await this.uploadSubCategory(
+        subCategoryData,
+        category.id
+      );
 
-      const productCreation = await this.uploadNewProducts(data, category.id, subCategory.id)
+      this.categoryList.push(category);
+      this.subCategoryList.push(subCategory);
 
-      if(!productCreation) return false
+      const product = productBuilder(data, category.id, subCategory.id);
+
+      if (product == null) continue;
+
+      if (this.products.get(product.productName)) {
+        this.products
+          .get(product.productName)
+          ?.productItems.push(product.productItems[0]);
+        continue;
+      }
+      this.products.set(product.productName, product);
     }
 
-    return true
+    return await this.uploadNewProducts();
   }
 
-  async uploadNewProducts(data: ICSVRow, categoryId: string, subCategoryId: string): Promise<Boolean> {
-    const product = productBuilder(data, categoryId, subCategoryId)
+  async uploadNewProducts() {
+    console.log(this.products);
+    for (const [_, product] of this.products) {
+      const result = await this.firebaseHelper.create(
+        productCollection,
+        product
+      );
 
-    if(product == null) return false
-
-    const findProduct = await this.firebaseHelper.getByColumn(productCollection, "productName", product.productName)
-    if(findProduct != null) {
-      findProduct.productItems.push(product.productItems[0])
-      const creationResult = await this.firebaseHelper.update(findProduct.id, findProduct, productCollection)
-      return creationResult
+      if (!result) return result;
     }
 
-    const result = await this.firebaseHelper.create(productCollection, product)
-
-    return result;
+    return true;
   }
 
-  async uploadCategory(category: string): Promise<Category> {
-    category = category.trim()
-    for (const categoryInformation of this.categoryList) {
-      if (category === categoryInformation.name) return categoryInformation;
+  async uploadCategory(category: string): Promise<Category | null> {
+    try {
+      category = category.trim();
+      for (const categoryInformation of this.categoryList) {
+        if (category === categoryInformation.name) return categoryInformation;
+      }
+
+      const categoryInformation: Category = {
+        id: v4(),
+        name: category,
+      };
+
+      this.categoryFirebaseHelper.create(categoryCollection, categoryInformation);
+      return categoryInformation;
+    } catch (error) {
+      console.log(error)
+      return null
     }
-
-    const categoryInformation: Category = {
-      id: v4(),
-      name: category,
-    };
-
-    this.categoryFirebaseHelper.create(categoryCollection, categoryInformation);
-    return categoryInformation;
+    
   }
 
-  async uploadSubCategory(subCategory: string, categoryId: string): Promise<SubCategory> {
-    subCategory = subCategory.trim()
+  async uploadSubCategory(
+    subCategory: string,
+    categoryId: string
+  ): Promise<SubCategory> {
+    subCategory = subCategory.trim();
     for (const categoryInformation of this.subCategoryList) {
       if (subCategory === categoryInformation.name) return categoryInformation;
     }
@@ -109,7 +130,7 @@ export default class UpdateProductCSVHandler {
     const categoryInformation: SubCategory = {
       id: v4(),
       name: subCategory,
-      categoryId: categoryId
+      categoryId: categoryId,
     };
 
     this.categoryFirebaseHelper.create(

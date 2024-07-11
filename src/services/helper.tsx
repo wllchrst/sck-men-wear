@@ -15,6 +15,16 @@ function getFile(
   }
 }
 
+function formatPrice(price: number): string {
+  try {
+    const rupiahStr = price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return `Rp ${rupiahStr}`;
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
+}
+
 async function postImage(file: File) {
   const imageRef = ref(storage, file.name);
   await uploadBytes(imageRef, file);
@@ -23,11 +33,11 @@ async function postImage(file: File) {
 }
 
 function showingNavbar(page: NavbarLink, user: User | null): boolean {
-  if(page.pageLink.adminAuth == false) return true;
-  
-  if(user == null) return false
-  
-  return user.userRole == Settings.ADMIN
+  if (page.pageLink.adminAuth == false) return true;
+
+  if (user == null) return false;
+
+  return user.userRole == Settings.ADMIN;
 }
 
 function changeHandle<T>(
@@ -38,4 +48,4 @@ function changeHandle<T>(
   setData({ ...data, [event.target.name]: event.target.value });
 }
 
-export { getFile, postImage, changeHandle, showingNavbar };
+export { getFile, postImage, changeHandle, showingNavbar, formatPrice };
