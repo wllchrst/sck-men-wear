@@ -3,9 +3,10 @@ import Loading from "../components/global/loading";
 import ProductCard from "../components/shared/product-card";
 import ProductFilter from "../components/shared/product-filter";
 import useFetchProductsFiltered from "../hooks/use-fetch-products-filtered";
+import ProductPagination from "../components/shared/product-pagination";
 
 export default function Products() {
-  const { filteredProducts, isLoading, setFilter, resetFilter } =
+  const { filteredProducts, isLoading, setFilter, resetFilter, before, after, pageAmount, currentPage, setCurrentPage } =
     useFetchProductsFiltered();
   if (isLoading) return <Loading />;
   return (
@@ -35,6 +36,7 @@ export default function Products() {
           </div>
         ))}
       </Grid>
+      <ProductPagination currentPage={currentPage} setCurrentPage={setCurrentPage} pageAmount={pageAmount} before={before} after={after}></ProductPagination>
     </Box>
   );
 }

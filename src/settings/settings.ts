@@ -15,4 +15,5 @@ export class Settings {
   static CUSTOMER = "customer"
   static userEmailCookie = "user-email"
   static LIMIT_FETCH_PRODUCT = 100; // for debug only.
+  static PRODUCT_PER_PAGE = 12;
 }

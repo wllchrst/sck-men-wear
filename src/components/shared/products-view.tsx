@@ -51,7 +51,6 @@ export default function ProductsView({ isAdmin }: Props) {
           </>
         ))}
       </Grid>
-      <Box>Somehting</Box>
     </>
   );
 }

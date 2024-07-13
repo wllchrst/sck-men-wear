@@ -4,7 +4,7 @@ import { FilterProduct } from "../interfaces/filter-products-interface";
 import { Product } from "../interfaces/product-interface";
 
 export default function useFetchProductsFiltered() {
-  const { products, setProducts, isLoading } = useFetchProducts();
+  const { products, setProducts, isLoading, before, after, pageAmount, currentPage, setCurrentPage } = useFetchProducts();
   const [filteredProducts, setfilteredProducts] = useState<Product[]>(products);
   const [filter, setFilter] = useState({
     categoriesId: "",
@@ -36,8 +36,8 @@ export default function useFetchProductsFiltered() {
 
   useEffect(() => {
     filterProduct();
-    console.log(filter)
-  }, [filter, isLoading]);
+  }, [filter, isLoading, products]);
 
-  return { filteredProducts, isLoading, resetFilter, setFilter };
+
+  return { filteredProducts, isLoading, resetFilter, setFilter, before, after, pageAmount, currentPage, setCurrentPage };
 }
