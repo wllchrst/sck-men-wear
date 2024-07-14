@@ -61,7 +61,8 @@ export default function ChatBox() {
   return (
     <Box border={""} className="h-full flex flex-col gap-1 w-full">
       <Box
-        className="flex rounded-md bg-blue-400"
+        border={''}
+        className="flex rounded-md mb-4"
         width={"100%"}
         height={"90%"}
       >

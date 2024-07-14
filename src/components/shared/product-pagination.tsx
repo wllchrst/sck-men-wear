@@ -12,12 +12,12 @@ export default function ProductPagination({before, after, pageAmount, currentPag
     const buttons :number[] = []
 
     if(currentPage > 1) {
-        for(let i = currentPage + -1; i < currentPage + 4  && i < pageAmount; i++) {
+        for(let i = currentPage + -1; i < currentPage + 4  && i <= pageAmount; i++) {
             buttons.push(i)
         }
     }
     else if(currentPage <= 1) {
-        for(let i = 1; i < 6 && i < pageAmount; i++) {
+        for(let i = 1; i < 6 && i <= pageAmount; i++) {
             buttons.push(i)
         }
     }

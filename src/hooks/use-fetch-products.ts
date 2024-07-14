@@ -52,6 +52,7 @@ export default function useFetchProducts() {
   }
 
   function after(){
+    if(currentPage >= pageAmount - 1) return;
     const page = currentPage + 1;
     setPage(page)
   }
@@ -72,8 +73,11 @@ export default function useFetchProducts() {
 
   useEffect(() => {
     if(fetchProducts.length <= 0) return;
-    setPageAmount(Math.ceil(fetchProducts.length / Settings.PRODUCT_PER_PAGE))
-    getProductForPage();
+
+    setProducts(fetchProducts)
+    
+    // setPageAmount(Math.ceil(fetchProducts.length / Settings.PRODUCT_PER_PAGE))
+    // getProductForPage();
   }, [fetchProducts])
 
   useEffect(() => {
