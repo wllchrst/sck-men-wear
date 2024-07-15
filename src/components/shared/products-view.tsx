@@ -41,14 +41,14 @@ export default function ProductsView({ isAdmin }: Props) {
         gridGap={"2rem"}
       >
         {products.map((product, index) => (
-          <>
+          <div key={index}>
             <ProductCard
               product={product}
               deleteHandle={deleteHandle}
               isAdmin={isAdmin}
               key={index}
             />
-          </>
+          </div>
         ))}
       </Grid>
     </>

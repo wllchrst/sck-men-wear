@@ -58,7 +58,7 @@ export default class UpdateProductCSVHandler {
 
       const category = await this.uploadCategory(categoryData);
 
-      if(category == null) continue;
+      if (category == null) continue;
       const subCategory = await this.uploadSubCategory(
         subCategoryData,
         category.id
@@ -68,10 +68,18 @@ export default class UpdateProductCSVHandler {
       this.subCategoryList.push(subCategory);
 
       const product = productBuilder(data, category.id, subCategory.id);
-
       if (product == null) continue;
+      const productInformation = this.products.get(product.productName)
 
-      if (this.products.get(product.productName)) {
+      if (productInformation) {
+        var insert = true
+        for(const productItem of productInformation.productItems)  {
+          if(productItem.size == product.productItems[0].size) {
+            insert = false
+            break;
+          }
+        }
+        if(insert == false) continue;
         this.products
           .get(product.productName)
           ?.productItems.push(product.productItems[0]);
@@ -109,13 +117,15 @@ export default class UpdateProductCSVHandler {
         name: category,
       };
 
-      this.categoryFirebaseHelper.create(categoryCollection, categoryInformation);
+      this.categoryFirebaseHelper.create(
+        categoryCollection,
+        categoryInformation
+      );
       return categoryInformation;
     } catch (error) {
-      console.log(error)
-      return null
+      console.log(error);
+      return null;
     }
-    
   }
 
   async uploadSubCategory(

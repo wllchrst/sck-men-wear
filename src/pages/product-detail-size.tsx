@@ -14,7 +14,7 @@ export default function ProductDetailSize({
   setProductItem,
 }: I) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-wrap">
       {product.productItems.map((product, index) => (
         <div key={index}>
           <Button

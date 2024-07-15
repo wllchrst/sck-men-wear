@@ -4,32 +4,50 @@ import ProductCard from "../components/shared/product-card";
 import ProductFilter from "../components/shared/product-filter";
 import useFetchProductsFiltered from "../hooks/use-fetch-products-filtered";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Products() {
   const { filteredProducts, isLoading, setFilter, resetFilter } =
     useFetchProductsFiltered();
-  if (isLoading) return <Loading />;
 
-  const chunkSize = 20;
+  const chunkSize = 12;
   const [hasMore, setHasMore] = useState(true);
   const [items, setItems] = useState(filteredProducts.slice(0, chunkSize));
 
-  function getMoreData() {}
+  function reset() {
+    resetFilter();
+    const getItem = filteredProducts.slice(0, chunkSize);
+    setItems(getItem);
+    setHasMore(true);
+  }
 
+  useEffect(() => {
+    const getItem = filteredProducts.slice(0, chunkSize);
+    setItems(getItem);
+  }, [filteredProducts]);
+
+  function getMoreData() {
+    const currentLength = items.length;
+    const nextItems = filteredProducts.slice(
+      currentLength,
+      currentLength + chunkSize
+    );
+
+    setItems([...items, ...nextItems]);
+
+    if (items.length >= filteredProducts.length) setHasMore(false);
+  }
+
+  if (isLoading) return <Loading />;
   return (
     <Box padding={5}>
-      <ProductFilter
-        resetFilter={resetFilter}
-        setFilter={setFilter}
-      ></ProductFilter>
-
-      {/* bagian buat kasih liat product nya */}
+      <ProductFilter resetFilter={reset} setFilter={setFilter}></ProductFilter>
       <InfiniteScroll
         dataLength={items.length}
         next={getMoreData}
         hasMore={hasMore}
-        loader={<Loading/>}
+        loader={<Loading />}
+        endMessage={<></>}
       >
         <Grid
           templateColumns={{
@@ -41,7 +59,7 @@ export default function Products() {
           gridGap={"20px"}
           paddingTop={4}
         >
-          {filteredProducts.map((product, index) => (
+          {items.map((product, index) => (
             <div key={index}>
               <ProductCard
                 isAdmin={false}
@@ -53,8 +71,6 @@ export default function Products() {
           ))}
         </Grid>
       </InfiniteScroll>
-
-      {/* <ProductPagination currentPage={currentPage} setCurrentPage={setCurrentPage} pageAmount={pageAmount} before={before} after={after}></ProductPagination> */}
     </Box>
   );
 }

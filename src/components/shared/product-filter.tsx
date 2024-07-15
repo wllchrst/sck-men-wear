@@ -12,7 +12,7 @@ import Loading from "../global/loading";
 import filterIcon from "../../assets/filter-icon.png";
 import { FilterProduct } from "../../interfaces/filter-products-interface";
 import { ChangeEvent, useState } from "react";
-import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons";
+import { DeleteIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 
 interface I {
   setFilter: React.Dispatch<React.SetStateAction<FilterProduct>>;
@@ -66,8 +66,8 @@ export default function ProductFilter({ resetFilter, setFilter }: I) {
           onChange={(e) => changeHandle(e)}
         />
         <Tooltip label="Filter Products!">
-          <Button padding={1} onClick={() => buttonHandle()}>
-            <Image src={filterIcon} width={"25px"} />
+          <Button as={Icon} padding={3} onClick={() => buttonHandle()}>
+            <SearchIcon />
           </Button>
         </Tooltip>
 

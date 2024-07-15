@@ -17,7 +17,7 @@ export function productBuilder(
       productItems: [
         {
           price: getPrice(data[PRODUCT_DATA.price]),
-          size: data[PRODUCT_DATA.size],
+          size: data[PRODUCT_DATA.size].trim(),
           piecesPerPrice: getPrice(data[PRODUCT_DATA.piecesPerPrice]),
         },
       ],
