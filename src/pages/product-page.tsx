@@ -22,8 +22,14 @@ export default function Products() {
   }
 
   useEffect(() => {
+    if (filteredProducts.length <= 0) {
+      setItems([]);
+      setHasMore(false);
+      return;
+    }
     const getItem = filteredProducts.slice(0, chunkSize);
     setItems(getItem);
+    setHasMore(true);
   }, [filteredProducts]);
 
   function getMoreData() {
