@@ -12,6 +12,7 @@ export default function UserContextProvider({ children }: IChildren) {
 
   function setCurrentUser(user: User) {
     if (user == null) setIsLoggedIn(false);
+    
 
     setIsLoggedIn(true);
     setUser(user);
