@@ -9,13 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { famousCategories } from "../../settings/famous-categories";
 import ChangeCategoryProductImage from "./change-category-product-image";
+import useFetchPopularCategories from "../../hooks/use-fetch-popular-category";
+import Loading from "../global/loading";
+import { getUserContext } from "../../context/user-context";
+import { Settings } from "../../settings/settings";
 
 export default function KategoriProdukUnggulan() {
+  const { isLoading, popularCategory } = useFetchPopularCategories();
+  const { user } = getUserContext();
 
+  if (isLoading) return <Loading />;
 
-  function clickHandle() {
-    console.log("div clicked");
-  }
   return (
     <div className="w-screen mt-9">
       <div className="flex justify-center mb-10 flex-col items-center gap-5">
@@ -35,7 +39,7 @@ export default function KategoriProdukUnggulan() {
           base: "repeat(2, 1fr)",
         }}
       >
-        {famousCategories.map((category, index) => (
+        {popularCategory.map((category, index) => (
           <Center
             position={"relative"}
             height={{ lg: "300px", md: "300px", base: "100px" }}
@@ -45,7 +49,6 @@ export default function KategoriProdukUnggulan() {
             backgroundSize="cover"
             key={index}
             zIndex={2}
-            onClick={clickHandle}
           >
             <Box
               position="absolute"
@@ -53,9 +56,9 @@ export default function KategoriProdukUnggulan() {
               left="0"
               right="0"
               bottom="0"
-              backgroundColor={`${category.color} 0.8)`}
+              backgroundColor={`${famousCategories[index].color} 0.8)`}
               _hover={{
-                backgroundColor: `${category.color} 0.1)`,
+                backgroundColor: `${famousCategories[index].color} 0.1)`,
               }}
               zIndex="1"
             />
@@ -70,9 +73,13 @@ export default function KategoriProdukUnggulan() {
                 fontSize={{ large: "x-large", base: "large" }}
                 fontWeight={"bold"}
               >
-                {category.displayText}
+                {category.name}
               </Text>
-              <ChangeCategoryProductImage />
+              {user != null && user.userRole == Settings.ADMIN && (
+                <>
+                  <ChangeCategoryProductImage popularCategory={category} />
+                </>
+              )}
             </Box>
           </Center>
         ))}

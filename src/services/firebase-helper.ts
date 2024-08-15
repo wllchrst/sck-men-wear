@@ -46,8 +46,9 @@ export default class FirebaseHelper<T> {
     try {
       const q = query(collection, where("id", "==", id));
       const snapshot = await getDocs(q);
+      console.log(snapshot.docs);
 
-      if (snapshot.docs.length != 1) return snapshot.docs[0].data() as T;
+      if (snapshot.docs.length >= 1) return snapshot.docs[0].data() as T;
       return null;
     } catch (error) {
       console.log(error);
