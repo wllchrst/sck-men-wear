@@ -1,7 +1,21 @@
-import { Box, Button, Center, Divider, Grid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonSpinner,
+  Center,
+  Divider,
+  Grid,
+  Text,
+} from "@chakra-ui/react";
 import { famousCategories } from "../../settings/famous-categories";
+import ChangeCategoryProductImage from "./change-category-product-image";
 
 export default function KategoriProdukUnggulan() {
+
+
+  function clickHandle() {
+    console.log("div clicked");
+  }
   return (
     <div className="w-screen mt-9">
       <div className="flex justify-center mb-10 flex-col items-center gap-5">
@@ -30,6 +44,8 @@ export default function KategoriProdukUnggulan() {
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
             key={index}
+            zIndex={2}
+            onClick={clickHandle}
           >
             <Box
               position="absolute"
@@ -51,11 +67,12 @@ export default function KategoriProdukUnggulan() {
               <Text
                 color={"white"}
                 letterSpacing={"2px"}
-                fontSize={{large: "x-large", base: "large"}}
+                fontSize={{ large: "x-large", base: "large" }}
                 fontWeight={"bold"}
               >
                 {category.displayText}
               </Text>
+              <ChangeCategoryProductImage />
             </Box>
           </Center>
         ))}
