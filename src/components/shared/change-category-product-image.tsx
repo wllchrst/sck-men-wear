@@ -29,11 +29,12 @@ export default function ChangeCategoryProductImage() {
       toast.failedToast("Pilih file terlebih dahulu");
       return;
     }
+  }
 
   return (
     <>
       <Button onClick={open}>Edit</Button>
-
+      
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
