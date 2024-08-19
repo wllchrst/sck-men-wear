@@ -32,12 +32,14 @@ export default function Products() {
     setHasMore(true);
   }, [filteredProducts]);
 
-  function getMoreData() {
+  async function getMoreData() {
     const currentLength = items.length;
     const nextItems = filteredProducts.slice(
       currentLength,
       currentLength + chunkSize
     );
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setItems([...items, ...nextItems]);
 

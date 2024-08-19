@@ -64,7 +64,7 @@ export default function App() {
             path="/products/:id"
             element={
               <MainLayout>
-                <ProductDetailPage/>
+                <ProductDetailPage />
               </MainLayout>
             }
           />
