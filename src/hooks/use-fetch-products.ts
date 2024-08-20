@@ -5,7 +5,7 @@ import { productCollection } from "../settings/firebase-config";
 import { Settings } from "../settings/settings";
 
 export default function useFetchProducts() {
-  const [pageAmount, setPageAmount] = useState<number>(0);
+  const [pageAmount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [fetchProducts, setFetchProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
@@ -55,15 +55,6 @@ export default function useFetchProducts() {
     if(currentPage >= pageAmount - 1) return;
     const page = currentPage + 1;
     setPage(page)
-  }
-
-  function getProductForPage(){
-    const getProduct: Product[] = []
-    for(let i = 0 ; i < Settings.PRODUCT_PER_PAGE; i++) {
-      const product = fetchProducts[i];
-      getProduct.push(product);
-    }
-    setProducts(getProduct);
   }
 
   useEffect(() => {

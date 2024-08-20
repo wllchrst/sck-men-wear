@@ -96,6 +96,4 @@ async function deleteProduct(id: string) {
   return result;
 }
 
-async function updateProduct(id: string, product: Product) {}
-
 export { createProduct, deleteProduct, validateProductCreation, deleteAllProduct };

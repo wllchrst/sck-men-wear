@@ -1,5 +1,4 @@
 import {
-  Box,
   Grid,
 } from "@chakra-ui/react";
 import useFetchProducts from "../../hooks/use-fetch-products";

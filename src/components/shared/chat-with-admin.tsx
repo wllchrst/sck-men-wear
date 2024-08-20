@@ -2,7 +2,6 @@ import { ChatIcon } from "@chakra-ui/icons";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -14,7 +13,6 @@ import {
 import { ToastBuilder } from "../../builder/toast-builder";
 import { getUserContext } from "../../context/user-context";
 import ChatBox from "./chat-box";
-import FetchBuilder from "../../builder/fetch-builder";
 
 
 export default function ChatWithAdmin() {

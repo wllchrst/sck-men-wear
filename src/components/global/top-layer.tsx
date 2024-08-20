@@ -1,12 +1,12 @@
-import { Box, Button, Tooltip } from "@chakra-ui/react";
-import { ChatIcon, EmailIcon } from "@chakra-ui/icons";
+import { Box, Tooltip } from "@chakra-ui/react";
+import { EmailIcon } from "@chakra-ui/icons";
 import { Settings } from "../../settings/settings";
 import NewTabLink from "../shared/anchor-new-tab";
 import ChatWithAdmin from "../shared/chat-with-admin";
 import { getUserContext } from "../../context/user-context";
 
 export default function () {
-  const {user, isLoggedIn} = getUserContext();
+  const {user } = getUserContext();
 
   if(user != null && user.userRole == Settings.ADMIN) return <></>
 

@@ -5,7 +5,6 @@ import {
   EditableInput,
   EditablePreview,
   EditableTextarea,
-  Heading,
   Image,
   Stack,
   Text,

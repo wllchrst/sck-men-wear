@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, IconButton, Text, useBreakpointValue } from "@chakra-ui/react";
+import React  from "react";
+import { Box, IconButton, Text} from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 // And react-slick as our Carousel Lib
@@ -29,7 +29,6 @@ interface I {
 
 export default function Carousel({ slide, isAdmin }: I) {
   const [slider, setSlider] = React.useState<Slider | null>(null);
-  const [id, setId] = useState("");
   const helper = new FirebaseHelper<Promotion>();
   function deleteCarousel(promotion: Promotion) {
     helper.deleteById(promotionCollection, promotion.id);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Promotion } from "../interfaces/promotion-interface";
-import FirebaseHelper from "../services/firebase-helper";
 import { promotionCollection } from "../settings/firebase-config";
 import { onSnapshot, query } from "firebase/firestore";
 

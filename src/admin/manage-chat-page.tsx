@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import useManageChat from "../hooks/use-manage-chat";
 import Loading from "../components/global/loading";
 import ManageChatUsername from "../components/shared/manage-chat-username";

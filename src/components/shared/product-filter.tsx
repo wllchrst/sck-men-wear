@@ -2,17 +2,15 @@ import {
   Button,
   Flex,
   Icon,
-  Image,
   Input,
   Select,
   Tooltip,
 } from "@chakra-ui/react";
 import useFetchCategories from "../../hooks/use-fetch-categories";
 import Loading from "../global/loading";
-import filterIcon from "../../assets/filter-icon.png";
 import { FilterProduct } from "../../interfaces/filter-products-interface";
 import { ChangeEvent, useState } from "react";
-import { DeleteIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
+import {  RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 
 interface I {
   setFilter: React.Dispatch<React.SetStateAction<FilterProduct>>;

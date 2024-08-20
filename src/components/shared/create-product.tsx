@@ -6,7 +6,7 @@ import {
   createProduct,
   validateProductCreation,
 } from "../../functions/product";
-import { v4, validate } from "uuid";
+import { v4 } from "uuid";
 import DrawerBuilder from "../../builder/drawer-builder";
 import useFetchCategories from "../../hooks/use-fetch-categories";
 import Loading from "../global/loading";

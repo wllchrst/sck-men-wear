@@ -1,9 +1,12 @@
 import { Divider, Grid, Text } from "@chakra-ui/react";
 import useFetchTopProducts from "../../hooks/use-fetch-top-products";
 import ProductCard from "./product-card";
+import Loading from "../global/loading";
 
 export default function ProdukUnggulan() {
   const { products, isLoading } = useFetchTopProducts();
+
+  if(isLoading) return <Loading/>
 
   return (
     <div className="mb-16">
