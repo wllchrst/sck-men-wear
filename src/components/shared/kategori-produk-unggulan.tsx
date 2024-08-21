@@ -1,10 +1,4 @@
-import {
-  Box,
-  Center,
-  Divider,
-  Grid,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Divider, Grid, Text } from "@chakra-ui/react";
 import { famousCategories } from "../../settings/famous-categories";
 import ChangeCategoryProductImage from "./change-category-product-image";
 import useFetchPopularCategories from "../../hooks/use-fetch-popular-category";
@@ -67,8 +61,7 @@ export default function KategoriProdukUnggulan() {
             >
               <Text
                 color={"white"}
-                letterSpacing={"2px"}
-                fontSize={{ large: "x-large", base: "large" }}
+                fontSize={{ lg: "2xl", md: "2xl", base: "1xl" }}
                 fontWeight={"bold"}
               >
                 {category.name}

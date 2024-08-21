@@ -1,4 +1,4 @@
-  import {
+import {
   Box,
   Flex,
   HStack,
@@ -23,6 +23,7 @@ import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { userLogout } from "../../functions/user";
 import { useNavigate } from "react-router-dom";
 import NavbarLinks from "./navbar-links";
+import MobileNavbar from "./mobile-navbar";
 
 export default function Navbar() {
   const { isLoggedIn, user } = getUserContext();
@@ -108,53 +109,7 @@ export default function Navbar() {
             />
           </Box>
         </Flex>
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {pages.map((page, key) => (
-                <div key={key}>
-                  {page.subLinks.length >= 1 ? (
-                    <>
-                      <Menu>
-                        <MenuButton
-                          as={Button}
-                          padding={0}
-                          bg={"transparent"}
-                          fontWeight={0}
-                          _hover={{
-                            textDecor: "underline",
-                          }}
-                          _active={{
-                            bg: "transparent",
-                          }}
-                        >
-                          {page.pageLink.display}
-                        </MenuButton>
-                        <MenuList className="">
-                          {page.subLinks.map((subPage, key) => (
-                            <div key={key}>
-                              <MenuItem>
-                                <NavigationLink link={subPage.link} key={key}>
-                                  {subPage.display}
-                                </NavigationLink>
-                              </MenuItem>
-                            </div>
-                          ))}
-                        </MenuList>
-                      </Menu>
-                    </>
-                  ) : (
-                    <>
-                      <NavigationLink link={page.pageLink.link} key={key}>
-                        {page.pageLink.display}
-                      </NavigationLink>
-                    </>
-                  )}
-                </div>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
+        {isOpen ? <MobileNavbar pages={pages} /> : null}
       </Box>
     </>
   );
