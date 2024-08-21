@@ -59,13 +59,8 @@ export default function ChatBox() {
   }
 
   return (
-    <Box border={""} className="h-full flex flex-col gap-1 w-full">
-      <Box
-        border={''}
-        className="flex rounded-md mb-4"
-        width={"100%"}
-        height={"90%"}
-      >
+    <Box className="h-full flex flex-col gap-1 w-full">
+      <Box className="flex rounded-md mb-4" width={"100%"} height={"90%"}>
         <Box
           className="flex flex-col-reverse w-full m-3 gap-4 h-full"
           backgroundColor={"white"}
@@ -95,7 +90,6 @@ export default function ChatBox() {
         <Box
           height={"100%"}
           width={"90%"}
-          border={""}
           className="flex justify-center items-center"
         >
           <Input
@@ -103,6 +97,8 @@ export default function ChatBox() {
             value={userInput}
             placeholder="Ketik disini..."
             onChange={(e) => setUserInput(e.target.value)}
+            variant={"outline"}
+            border={"1px solid rgb(162, 162, 162)"}
           ></Input>
         </Box>
         <Box>
@@ -110,6 +106,8 @@ export default function ChatBox() {
             as={ChevronRightIcon}
             padding={2}
             onClick={() => clickHandle()}
+            border={"1px solid rgb(162, 162, 162)"}
+            variant={"outline"}
           ></Button>
         </Box>
       </HStack>

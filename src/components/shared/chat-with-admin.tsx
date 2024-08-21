@@ -14,7 +14,6 @@ import { ToastBuilder } from "../../builder/toast-builder";
 import { getUserContext } from "../../context/user-context";
 import ChatBox from "./chat-box";
 
-
 export default function ChatWithAdmin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toastBuilder = new ToastBuilder("Chat Admin");
@@ -50,9 +49,7 @@ export default function ChatWithAdmin() {
           <DrawerCloseButton />
           <DrawerHeader>Chat Admin</DrawerHeader>
 
-          <DrawerBody>
-            {user == null ? <></> :<ChatBox></ChatBox> }
-          </DrawerBody>
+          <DrawerBody>{user == null ? <></> : <ChatBox></ChatBox>}</DrawerBody>
         </DrawerContent>
       </Drawer>
     </>
