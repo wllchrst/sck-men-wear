@@ -17,7 +17,7 @@ export default function Login() {
   const toast = new ToastBuilder("Login");
   const userContext = getUserContext();
   const navigation = useNavigate();
-  const { setCurrentUserEmail } = getUserContext()
+  const { setCurrentUserEmail } = getUserContext();
 
   function buttonHandle() {
     console.log(user);
@@ -25,16 +25,15 @@ export default function Login() {
     userLogin(user).then((result) => {
       toast.closeAllToast();
       if (result) {
-        toast.successToast("Login suskes mohon tunggu sebentar")
-        setCurrentUserEmail(user.email)
-        navigation("/")
-        window.location.reload()
-      }
-      else toast.failedToast("Login gagal");
+        toast.successToast("Login suskes mohon tunggu sebentar");
+        setCurrentUserEmail(user.email);
+        navigation("/");
+        window.location.reload();
+      } else toast.failedToast("Login gagal");
     });
   }
 
-  console.log(UserService.userEmail)
+  console.log(UserService.userEmail);
 
   useEffect(() => {
     console.log(userContext.isLoggedIn);
@@ -42,6 +41,10 @@ export default function Login() {
       navigation("/");
     }
   }, [userContext]);
+
+  function redirect() {
+    navigation("/");
+  }
 
   return (
     <Box
@@ -53,7 +56,11 @@ export default function Login() {
       position={"relative"}
     >
       <Box position={"fixed"} left={0} top={0} padding={5}>
-        <Button padding={3} as={ArrowBackIcon}></Button>
+        <Button
+          padding={3}
+          as={ArrowBackIcon}
+          onClick={() => redirect()}
+        ></Button>
       </Box>
       <div className="flex w-full h-full items-center justify-center bg-black bg-opacity-50">
         <Box

@@ -17,6 +17,10 @@ export default function Register() {
   const userContext = getUserContext();
   const navigation = useNavigate();
 
+  function redirect() {
+    navigation("/");
+  }
+
   useEffect(() => {
     console.log(userContext);
     if (userContext.isLoggedIn) {
@@ -45,7 +49,11 @@ export default function Register() {
     >
       <div className="flex w-full h-full items-center justify-center bg-black bg-opacity-50">
         <Box position={"fixed"} left={0} top={0} padding={5}>
-          <Button padding={3} as={ArrowBackIcon}></Button>
+          <Button
+            padding={3}
+            as={ArrowBackIcon}
+            onClick={() => redirect()}
+          ></Button>
         </Box>
         <Box
           className="border-4 p-8 border-gray-300 shadow-lg rounded-md flex justify-center bg-sky-100 flex-col gap-6"

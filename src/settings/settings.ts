@@ -1,5 +1,5 @@
 export class Settings {
-  static TOP_AMOUNT_PRODUCTS = 20;
+  static TOP_AMOUNT_PRODUCTS = 12;
   static NAMA_PT = "PT. SEKAWAN KARUNIA JAYA";
   static GOOGLE_MAP_API_KEY = "AIzaSyBWbrU6ZXO3yOYtYDnrTKMn2Iam85d14uw";
   static NOMOR_TELEPON = "0811-9757-222 (WHATSAPP)";
@@ -11,9 +11,9 @@ export class Settings {
     "Jl. Dr. Rajiman No.15, Kota Surakarta, Jawa Tengah 57155";
   static google_map_link = "https://maps.app.goo.gl/o9aafu8SNFgFH2686";
 
-  static ADMIN = "admin"
-  static CUSTOMER = "customer"
-  static userEmailCookie = "user-email"
+  static ADMIN = "admin";
+  static CUSTOMER = "customer";
+  static userEmailCookie = "user-email";
   static LIMIT_FETCH_PRODUCT = 100; // for debug only.
   static PRODUCT_PER_PAGE = 12;
 }
