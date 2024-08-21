@@ -10,7 +10,6 @@ import {
 import { NavbarLink } from "../../interfaces/navbar-interface";
 import NavigationLink from "../shared/nav-link";
 import { getUserContext } from "../../context/user-context";
-import { Settings } from "../../settings/settings";
 import { showingNavbar } from "../../services/helper";
 
 interface I {
@@ -67,7 +66,7 @@ function MobileNavbar({ pages }: I) {
                     </>
                   )}
                 </div>
-            ) : (
+              ) : (
                 <></>
               )}
             </>
