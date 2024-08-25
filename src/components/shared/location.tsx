@@ -18,9 +18,15 @@ export default function Location() {
         <Divider width={"50%"} />
       </div>
 
-      <Center>
-        <Text fontSize={'x-large'} marginBottom={'3rem'}>{Settings.lokasi_jualan}</Text>
-      </Center>
+      <div className="flex justify-center items-center">
+        <Text
+          className="font-bold p-0 sm:px-10 text-center"
+          fontSize={{ lg: "x-large", base: "medium" }}
+          marginBottom={"3rem"}
+        >
+          {Settings.lokasi_jualan}
+        </Text>
+      </div>
       <div className="flex px-24 items-center gap-8 justify-center">
         <div className="w-1/2 flex flex-col">
           <NewTabLink link={Settings.google_map_link}>

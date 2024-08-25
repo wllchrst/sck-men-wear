@@ -18,7 +18,7 @@ export default function TestimoniItem({ url }: I) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
-      <Image src={url} onClick={onOpen} />
+      <Image width={{ base: "100%" }} src={url} onClick={onOpen} />
 
       <Modal isOpen={isOpen} onClose={onClose} size={"5xl"}>
         <ModalOverlay />

@@ -10,33 +10,33 @@ import { Settings } from "../settings/settings";
 const helper = new FirebaseHelper();
 
 function validateUserCreation(user: User): IResponse {
-  let message = ""
+  let message = "";
 
-  if (user.email == "") message = "Email cannot be empty"
-  else if (user.password) message = "Password cannot be empty"
+  if (user.email == "") message = "Email cannot be empty";
+  else if (user.password) message = "Password cannot be empty";
 
   const response: IResponse = {
     message: message,
-    success: message == ""
-  }
+    success: message == "",
+  };
 
-  return response
+  return response;
 }
 
 async function userRegister(user: User): Promise<IResponse> {
   try {
-    const validationResult = validateUserCreation(user)
+    const validationResult = validateUserCreation(user);
 
-    if (!validationResult.success) return validationResult
+    if (!validationResult.success) return validationResult;
 
     const result = helper.create(userCollection, user);
 
-    if (!result) return createResponse("Gagal membuat akun", result)
+    if (!result) return createResponse("Gagal membuat akun", result);
 
-    return createResponse("Sukses membuat akun", true)
+    return createResponse("Sukses membuat akun", true);
   } catch (error) {
     console.log(error);
-    return createResponse("Gagal membuat akun", false)
+    return createResponse("Gagal membuat akun", false);
   }
 }
 
@@ -58,22 +58,22 @@ async function getUser(email: string) {
 }
 
 function userLogout() {
-  Cookies.remove(Settings.userEmailCookie)
+  Cookies.remove(Settings.userEmailCookie);
 }
 
 async function userLogin(user: User): Promise<User | null> {
   try {
-    const loginResult = await UserService.LoginUser(user.email)
-    if(loginResult == null) return null
+    const loginResult = await UserService.LoginUser(user.email);
+    if (loginResult == null) return null;
 
-    Cookies.set(Settings.userEmailCookie, loginResult.email)
+    Cookies.set(Settings.userEmailCookie, loginResult.email);
 
-    console.log(loginResult)
+    console.log(loginResult);
 
-    return loginResult
+    return loginResult;
   } catch (error) {
-    console.log(error)
-    return null
+    console.log(error);
+    return null;
   }
 }
 

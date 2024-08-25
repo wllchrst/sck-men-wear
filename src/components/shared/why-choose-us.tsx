@@ -44,27 +44,31 @@ export default function WhyChooseUs() {
 
   return (
     <Box className="flex flex-col">
-      <div className="flex flex-col gap-1 p-10 mt-10">
+      <div className="flex flex-col gap-5 p-10 mt-10">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={headingVariants}
-          className="flex justify-center items-center mb-24"
+          className="flex justify-center items-center mb-24 "
         >
-          <Heading>Kenapa HARUS Memilih Kita</Heading>
+          <Heading fontSize={{ base: "30px", lg: "50px" }}>
+            Kenapa HARUS Memilih Kita
+          </Heading>
         </motion.div>
 
         <motion.div
           initial="hidden"
           animate="visible"
           variants={variants}
-          className="flex flex-col gap-10 px-32"
+          className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
           <div className="flex items-center gap-10">
-            <Image src={website} />
-            <Heading>KAMI Memiliki WEB RESMI</Heading>
+            <Image src={website} width={{ base: "100px", lg: "200px" }} />
+            <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
+              KAMI Memiliki WEB RESMI
+            </Heading>
           </div>
-          <Text fontSize={"x-large"}>
+          <Text fontSize={{ lg: "x-large", base: "medium" }}>
             Kami memiliki website resmi yang memastikan kepada ANDA bahwa kami
             bukan agen Distributor Pakaian Dalam, Kaos Kaki, Sarung Tangan, Jas
             Hujan, Handuk, Payung, Kebutuhan Rumah Tangga dengan asal. Website
@@ -78,19 +82,21 @@ export default function WhyChooseUs() {
           initial="hidden"
           animate="visible"
           variants={leftToRight}
-          className="flex flex-col gap-10 px-32"
+          className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
-          <div className="flex justify-end items-center gap-10">
-            <Heading>Kami Memiliki Customer Service RESPONSIVE</Heading>
-            <Image src={service} />
+          <div className="flex items-center gap-10">
+            <Image src={service} width={{ base: "100px", lg: "200px" }} />
+            <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
+              Kami Memiliki Customer Service RESPONSIVE
+            </Heading>
           </div>
-
-          <Text fontSize={"x-large"} textAlign={"right"}>
+          <Text fontSize={{ lg: "x-large", base: "medium" }}>
             Layanan serta kontak customer service yang responsive sangat penting
             untuk memudahakan berkomunikasi antara konsumen dan produsen. Kami
             menyediakan customer service yang siap setiap hari dalam 24 jam
             untuk selalu terhubung dengan calon konsumen mulai awal chat – deal
             order – pembuatan – sampai dengan pengiriman kaos kaki.
+            dipertanggungjawabkan.
           </Text>
         </motion.div>
 
@@ -98,13 +104,15 @@ export default function WhyChooseUs() {
           initial="hidden"
           animate="visible"
           variants={variants}
-          className="flex flex-col gap-10 px-32 mt-16"
+          className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
           <div className="flex items-center gap-10">
-            <Image src={quality} />
-            <Heading>Kualitas Hasil Produksi TERJAMIN!</Heading>
+            <Image src={quality} width={{ base: "100px", lg: "200px" }} />
+            <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
+              Kualitas Hasil Produksi TERJAMIN!
+            </Heading>
           </div>
-          <Text fontSize={"x-large"}>
+          <Text fontSize={{ lg: "x-large", base: "medium" }}>
             Jaminan kepuasan merupakan hal yang kami utamakan. Kami menawarkan
             kualitas produk, kualitas dan harga DIJAMIN akan sesuai dengan apa
             yang telah anda pesan.
@@ -115,14 +123,15 @@ export default function WhyChooseUs() {
           initial="hidden"
           animate="visible"
           variants={leftToRight}
-          className="flex flex-col gap-10 px-32 mt-16"
+          className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
-          <div className="flex justify-end items-center gap-10">
-            <Heading>JAMINAN Barang Sampai Ke Tujuan</Heading>
-            <Image src={amang} />
+          <div className="flex items-center gap-10">
+            <Image src={amang} width={{ base: "100px", lg: "200px" }} />
+            <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
+              JAMINAN Barang Sampai Ke Tujuan
+            </Heading>
           </div>
-
-          <Text fontSize={"x-large"} textAlign={"right"}>
+          <Text fontSize={{ lg: "x-large", base: "medium" }}>
             Legalitas website dan juga perusahaan yang kami dirikan, customer
             service yang siap melayani anda non stop. Kualitas, pelayanan dan
             produk kami PASTIKAN sampai sesuai dengan waktu yang telah
@@ -134,13 +143,15 @@ export default function WhyChooseUs() {
           initial="hidden"
           animate="visible"
           variants={variants}
-          className="flex flex-col gap-10 px-32 mt-16"
+          className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
           <div className="flex items-center gap-10">
-            <Image src={lowPrice} />
-            <Heading>Penawaran Harga Produk Terbaik</Heading>
+            <Image src={quality} width={{ base: "100px", lg: "200px" }} />
+            <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
+              Penawaran Harga Produk Terbaik
+            </Heading>
           </div>
-          <Text fontSize={"x-large"}>
+          <Text fontSize={{ lg: "x-large", base: "medium" }}>
             KAMI memberikan harga terbaik dibandingkan dengan kompetitor
             lainnya. ANDA dapat membandingkan penawaran kami dengan agen/
             distributor lainnya. Dengan mutu produk yang berkualitas dan harga
