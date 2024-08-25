@@ -1,4 +1,4 @@
-import { Box, Center, Divider, Image, Text } from "@chakra-ui/react";
+import { Box, Divider, Image, Text } from "@chakra-ui/react";
 import { Settings } from "../../settings/settings";
 import NewTabLink from "./anchor-new-tab";
 import mapImage from "../../assets/google-map-image.png";

@@ -146,7 +146,7 @@ export default function WhyChooseUs() {
           className="flex flex-col gap-10 md:px-5 lg:px-32"
         >
           <div className="flex items-center gap-10">
-            <Image src={quality} width={{ base: "100px", lg: "200px" }} />
+            <Image src={lowPrice} width={{ base: "100px", lg: "200px" }} />
             <Heading fontSize={{ base: "x-large", lg: "xx-large" }}>
               Penawaran Harga Produk Terbaik
             </Heading>
