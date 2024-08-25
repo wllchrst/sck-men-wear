@@ -25,9 +25,15 @@ interface Props {
 
 export default function ProductCard({ product, isAdmin, deleteHandle }: Props) {
   const navigate = useNavigate();
+
   return (
     <div>
-      <Card className="relative">
+      <Card
+        className="relative hover:bg-slate-50 transition-all duration-300"
+        onClick={() => {
+          navigate(`/products/${product.id}`);
+        }}
+      >
         <CardBody border={""}>
           <ProductCardFloating product={product} />
           <Image src={product.pictureLink} fallbackSrc={pictureNotAvailable} />

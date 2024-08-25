@@ -31,7 +31,7 @@ export default function Navbar() {
         <Flex py={3} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <NavigationLink link="/">
-              <Image src={logo} width={175} />
+              <Image src={logo} width={{ lg: 175, base: 100 }} />
             </NavigationLink>
           </HStack>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>

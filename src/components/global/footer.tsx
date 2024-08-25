@@ -65,7 +65,7 @@ export default function Footer() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Image src={logo} width={"200px"} />
+        <Image src={logo} width={{ lg: "200px", base: "130px" }} />
         <Text fontSize={"large"}>{Settings.NAMA_PT}</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"YouTube"} href={"#"}>
