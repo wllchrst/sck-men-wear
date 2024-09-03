@@ -4,7 +4,7 @@ import { productCollection } from "../settings/firebase-config";
 import { query, where } from "firebase/firestore";
 import Loading from "../components/global/loading";
 import { Product } from "../interfaces/product-interface";
-import { Box, Heading, Image, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Spacer, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { formatPrice } from "../services/helper";
 import ProductDetailBadge from "./product-detail-badge";
@@ -31,13 +31,19 @@ export default function ProductDetailPage() {
 
   if (isLoading || data == null) return <Loading />;
   return (
-    <Box className="w-full py-10 flex px-16">
+    <Flex
+      className="w-full py-10 justify-center items-center"
+      direction={{ lg: "row", base: "column" }}
+      paddingX={{ lg: "16px", base: "0px" }}
+    >
       <Box className="w-1/3">
         <Image src={data.pictureLink} fallbackSrc={pictureNotAvailable} />
       </Box>
       <Box className="w-2/3 p-3">
         <div className="flex items-center gap-3">
-          <Heading fontSize={"x-large"}>{data.productName}</Heading>
+          <Heading fontSize={{ lg: "x-large", base: "large" }}>
+            {data.productName}
+          </Heading>
           <ProductDetailBadge product={data} />
         </div>
         <ProductRating product={data} />
@@ -55,6 +61,6 @@ export default function ProductDetailPage() {
           setProductItem={setProductItem}
         />
       </Box>
-    </Box>
+    </Flex>
   );
 }

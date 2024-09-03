@@ -19,7 +19,7 @@ export default function useFetchPopularCategories() {
           setIsLoading(false);
         } else {
           setPopularCategory([]);
-          setIsLoading(false);
+          setIsLoading(false);false
         }
       });
 
