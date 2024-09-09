@@ -8,7 +8,9 @@ import {
   query,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
+import { db } from "../settings/firebase-config";
 
 export default class FirebaseHelper<T> {
   async getAll(
@@ -28,10 +30,14 @@ export default class FirebaseHelper<T> {
     collection: CollectionReference<DocumentData, DocumentData>
   ): Promise<boolean> {
     try {
+      const batch = writeBatch(db);
       const snapshot = await getDocs(collection);
       for (const doc of snapshot.docs) {
-        await deleteDoc(doc.ref);
+        const ref = doc.ref;
+        batch.delete(ref);
       }
+
+      await batch.commit();
       return true;
     } catch (error) {
       console.log(error);

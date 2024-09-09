@@ -45,7 +45,7 @@ export default function UpdateProductsCSV() {
   return (
     <>
       <Button onClick={onOpen} colorScheme="teal">
-        Ubah Produk
+        Produk Pakai CSV
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>

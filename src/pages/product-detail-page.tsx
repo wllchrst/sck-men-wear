@@ -51,7 +51,7 @@ export default function ProductDetailPage() {
           {formatPrice(productItem.price)}
         </Text>
         <Spacer height={"20px"}></Spacer>
-        <Text fontSize={"small"} noOfLines={3}>
+        <Text fontSize={"small"} noOfLines={3} whiteSpace={"pre-line"}>
           {data.description}
         </Text>
         <Spacer height={"20px"}></Spacer>

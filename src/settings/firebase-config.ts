@@ -30,9 +30,10 @@ const categoryCollection = collection(db, "category");
 const userCollection = collection(db, "user");
 const chatWithAdminCollection = collection(db, "chatWithAdmin");
 const subCategoryCollection = collection(db, "sub-category");
-const popularCategoryCollection = collection(db, "popularCategory")
+const popularCategoryCollection = collection(db, "popularCategory");
 
 export {
+  db,
   subCategoryCollection,
   app,
   storage,
@@ -41,5 +42,5 @@ export {
   categoryCollection,
   userCollection,
   chatWithAdminCollection,
-  popularCategoryCollection
+  popularCategoryCollection,
 };
