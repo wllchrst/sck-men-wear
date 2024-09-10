@@ -43,7 +43,9 @@ export default function Products() {
 
     setItems([...items, ...nextItems]);
 
-    if (items.length >= filteredProducts.length) setHasMore(false);
+    if (items.length >= filteredProducts.length) {
+      setHasMore(false);
+    }
   }
 
   if (isLoading) return <Loading />;

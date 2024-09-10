@@ -32,14 +32,16 @@ export default function ProductDetailPage() {
   if (isLoading || data == null) return <Loading />;
   return (
     <Flex
-      className="w-full py-10 justify-center items-center"
+      className="w-full py-10 justify-center gap-5"
       direction={{ lg: "row", base: "column" }}
       paddingX={{ lg: "16px", base: "0px" }}
     >
-      <Box className="w-1/3">
-        <Image src={data.pictureLink} fallbackSrc={pictureNotAvailable} />
+      <Box className="w-1/2 flex justify-center">
+        <Box className="w-1/2 mt-10">
+          <Image src={data.pictureLink} fallbackSrc={pictureNotAvailable} />
+        </Box>
       </Box>
-      <Box className="w-2/3 p-3">
+      <Box className="w-1/2 p-3">
         <div className="flex items-center gap-3">
           <Heading fontSize={{ lg: "x-large", base: "large" }}>
             {data.productName}
@@ -51,7 +53,7 @@ export default function ProductDetailPage() {
           {formatPrice(productItem.price)}
         </Text>
         <Spacer height={"20px"}></Spacer>
-        <Text fontSize={"small"} noOfLines={3} whiteSpace={"pre-line"}>
+        <Text fontSize={"small"} noOfLines={1000} whiteSpace={"pre-line"}>
           {data.description}
         </Text>
         <Spacer height={"20px"}></Spacer>
