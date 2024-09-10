@@ -14,14 +14,22 @@ import {
 import Papa from "papaparse";
 import { ICSVRow } from "../../interfaces/csv-interface";
 import UpdateProductCSVHandler from "../../hooks/use-update-csv";
+import { ToastBuilder } from "../../builder/toast-builder";
 
 export default function UpdateProductsCSV() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handler = new UpdateProductCSVHandler();
   const { setCsvProducts } = handler.useUpdateCSV();
+  const toast = new ToastBuilder("Uploading Products");
 
-  function update(){
-    handler.update()
+  function update() {
+    toast.infoToast("Uploading all product data");
+    handler.update().then((result) => {
+      toast.closeAllToast();
+      const message = result.message;
+      if (result) toast.successToast(message);
+      else toast.failedToast(message);
+    });
   }
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {

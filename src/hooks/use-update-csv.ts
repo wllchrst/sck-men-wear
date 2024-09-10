@@ -5,7 +5,6 @@ import { Product } from "../interfaces/product-interface";
 import {
   categoryCollection,
   db,
-  productCollection,
   subCategoryCollection,
 } from "../settings/firebase-config";
 import { Category } from "../interfaces/category-interface";
@@ -14,6 +13,7 @@ import { productBuilder } from "../builder/product-builder";
 import { PRODUCT_DATA } from "../enums/product-data-enum";
 import { SubCategory } from "../interfaces/sub-category-interface";
 import { doc, writeBatch } from "firebase/firestore";
+import { createResponse, IResponse } from "../interfaces/response-interface";
 
 export default class UpdateProductCSVHandler {
   firebaseHelper: FirebaseHelper<Product>;
@@ -41,10 +41,15 @@ export default class UpdateProductCSVHandler {
     return { setCsvProducts };
   }
 
-  async update() {
-    if (this.csvRow.length <= 0) alert("Upload CSV Terlebih Dahulu");
+  async update(): Promise<IResponse> {
+    if (this.csvRow.length <= 0)
+      return createResponse("Upload CSV Terlebih Dahulu", false);
 
-    this.uploadData(this.csvRow);
+    const result = await this.uploadData(this.csvRow);
+    return createResponse(
+      result ? "Success" : "Something went wrong please contact the admin",
+      result
+    );
   }
 
   async uploadData(listOfData: ICSVRow[]): Promise<boolean> {
