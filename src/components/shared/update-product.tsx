@@ -1,104 +1,82 @@
 import {
-  Card,
-  CardBody,
-  Editable,
-  EditableInput,
-  EditablePreview,
-  EditableTextarea,
-  Image,
-  Stack,
-  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  Input,
 } from "@chakra-ui/react";
-import DrawerBuilder from "../../builder/drawer-builder";
 import { Product } from "../../interfaces/product-interface";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import FirebaseHelper from "../../services/firebase-helper";
 import { productCollection } from "../../settings/firebase-config";
+import { getFile, postImage } from "../../services/helper";
+import { ToastBuilder } from "../../builder/toast-builder";
 
 interface I {
   product: Product;
 }
+
 export default function UpdateProduct({ product }: I) {
-  const [productUpdated, setProductUpdated] = useState(product);
+  const toast = new ToastBuilder("Ganti Gambar Produk");
+  const [file, setFile] = useState<File>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const helper = new FirebaseHelper();
 
-  const changeHandle = (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    setProductUpdated({
-      ...productUpdated,
-      [event.target.name]: event.target.value,
-    });
-  };
+  function clickHandle(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.stopPropagation();
+    onOpen();
+  }
 
   function updateHandle() {
-    console.log(productUpdated);
-    helper
-      .update(product.id, productUpdated, productCollection)
-      .then((result) => {
-        console.log(result);
+    if (file == null) {
+      toast.failedToast("Pilih gambar terlebih dahulu");
+      return;
+    }
+
+    postImage(file).then((link) => {
+      product.pictureLink = link;
+      helper.update(product.id, product, productCollection).then((result) => {
+        if (result) {
+          toast.successToast("Ganti gambar sukses");
+          onClose();
+          return;
+        } else {
+          toast.failedToast("Ganti gambar gagal");
+          onClose();
+          return;
+        }
       });
+    });
   }
 
   return (
     <div>
-      <DrawerBuilder
-        buttonText="U"
-        size="md"
-        title="Update Product"
-        buttonClick={updateHandle}
-      >
-        <Card size={"md"}>
-          <CardBody>
-            <Image
-              src={product.pictureLink}
-              alt={product.productName}
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Editable
-                defaultValue={product.productName}
-                fontWeight={"bold"}
-                fontSize={"x-large"}
-              >
-                <EditablePreview />
-                <EditableInput name="name" onChange={(e) => changeHandle(e)} />
-              </Editable>
-              <Editable defaultValue={product.description}>
-                <EditablePreview />
-                <EditableTextarea
-                  name="description"
-                  onChange={(e) => changeHandle(e)}
-                  rows={4}
-                />
-              </Editable>
-              <Text
-                color="blue.600"
-                fontSize="2xl"
-                className="flex gap-1 items-center"
-              >
-                Rp.
-                <Editable
-                  defaultValue={product.productItems[0].price.toString()}
-                >
-                  {/* <EditablePreview />
-                  <EditableInput
-                    type="number"
-                    onChange={(e) =>
-                      setProductUpdated({
-                        ...productUpdated,
-                        productItems[0].price: parseFloat(e.target.value),
-                      })
-                    }
-                  /> */}
-                </Editable>
-              </Text>
-            </Stack>
-          </CardBody>
-        </Card>
-      </DrawerBuilder>
+      <Button onClick={(event) => clickHandle(event)}>GAMBAR</Button>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Ganti Gambar</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input type="file" onChange={(event) => getFile(event, setFile)} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={() => updateHandle()}>
+              Ganti
+            </Button>
+            <Button variant="ghost" onClick={onClose}>
+              Tutup
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
