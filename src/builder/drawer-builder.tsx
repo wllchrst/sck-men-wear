@@ -18,10 +18,16 @@ export default function DrawerBuilder({
   buttonClick,
 }: DrawerProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
-      <Button colorScheme="teal" onClick={onOpen}>
+      <Button
+        colorScheme="teal"
+        onClick={(event) => {
+          console.log("somethi");
+          event.isPropagationStopped();
+          onOpen();
+        }}
+      >
         {buttonText}
       </Button>
       <Drawer isOpen={isOpen} placement="right" size={size} onClose={onClose}>

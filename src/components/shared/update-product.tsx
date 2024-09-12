@@ -80,7 +80,9 @@ export default function UpdateProduct({ product }: I) {
                 className="flex gap-1 items-center"
               >
                 Rp.
-                <Editable defaultValue={product.productItems[0].price.toString()}>
+                <Editable
+                  defaultValue={product.productItems[0].price.toString()}
+                >
                   {/* <EditablePreview />
                   <EditableInput
                     type="number"
