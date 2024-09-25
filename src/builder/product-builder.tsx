@@ -45,6 +45,7 @@ function getFloat(rating: string) {
 }
 
 function getPrice(price: string): number {
+  price = price.replace(",", "").trim();
   price = price.replace(".", "").trim();
 
   return parseInt(price);

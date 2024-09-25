@@ -53,8 +53,9 @@ export default class UpdateProductCSVHandler {
   }
 
   async uploadData(listOfData: ICSVRow[]): Promise<boolean> {
-    this.categoryList =
-      await this.categoryFirebaseHelper.getAll(categoryCollection);
+    this.categoryList = await this.categoryFirebaseHelper.getAll(
+      categoryCollection
+    );
     this.subCategoryList = await this.subCategoryFirebaseHelper.getAll(
       subCategoryCollection
     );
