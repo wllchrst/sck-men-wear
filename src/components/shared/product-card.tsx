@@ -54,7 +54,7 @@ export default function ProductCard({ product, isAdmin, deleteHandle }: Props) {
               {product.description}
               {Settings.PRODUCT_DESC_HELPER}
             </Text>
-            <Flex justifyContent={"space-between"}>
+            <Flex justifyContent={"space-between"} flexDir={"column"} className="gap-3">
               <Text
                 color="blue.600"
                 fontSize="2xl"

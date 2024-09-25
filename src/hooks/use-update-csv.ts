@@ -4,7 +4,7 @@ import FirebaseHelper from "../services/firebase-helper";
 import { Product } from "../interfaces/product-interface";
 import {
   categoryCollection,
-  productCollection,
+  db,
   subCategoryCollection,
 } from "../settings/firebase-config";
 import { Category } from "../interfaces/category-interface";
@@ -12,6 +12,8 @@ import { v4 } from "uuid";
 import { productBuilder } from "../builder/product-builder";
 import { PRODUCT_DATA } from "../enums/product-data-enum";
 import { SubCategory } from "../interfaces/sub-category-interface";
+import { doc, writeBatch } from "firebase/firestore";
+import { createResponse, IResponse } from "../interfaces/response-interface";
 
 export default class UpdateProductCSVHandler {
   firebaseHelper: FirebaseHelper<Product>;
@@ -39,10 +41,15 @@ export default class UpdateProductCSVHandler {
     return { setCsvProducts };
   }
 
-  async update() {
-    if (this.csvRow.length <= 0) alert("Upload CSV Terlebih Dahulu");
+  async update(): Promise<IResponse> {
+    if (this.csvRow.length <= 0)
+      return createResponse("Upload CSV Terlebih Dahulu", false);
 
-    this.uploadData(this.csvRow);
+    const result = await this.uploadData(this.csvRow);
+    return createResponse(
+      result ? "Success" : "Something went wrong please contact the admin",
+      result
+    );
   }
 
   async uploadData(listOfData: ICSVRow[]): Promise<boolean> {
@@ -69,17 +76,17 @@ export default class UpdateProductCSVHandler {
 
       const product = productBuilder(data, category.id, subCategory.id);
       if (product == null) continue;
-      const productInformation = this.products.get(product.productName)
+      const productInformation = this.products.get(product.productName);
 
       if (productInformation) {
-        var insert = true
-        for(const productItem of productInformation.productItems)  {
-          if(productItem.size == product.productItems[0].size) {
-            insert = false
+        var insert = true;
+        for (const productItem of productInformation.productItems) {
+          if (productItem.size == product.productItems[0].size) {
+            insert = false;
             break;
           }
         }
-        if(insert == false) continue;
+        if (insert == false) continue;
         this.products
           .get(product.productName)
           ?.productItems.push(product.productItems[0]);
@@ -92,17 +99,21 @@ export default class UpdateProductCSVHandler {
   }
 
   async uploadNewProducts() {
-    console.log(this.products);
-    for (const [_, product] of this.products) {
-      const result = await this.firebaseHelper.create(
-        productCollection,
-        product
-      );
+    console.log(`products length: ${this.products.size}`);
+    const batch = writeBatch(db);
 
-      if (!result) return result;
+    for (const [_, product] of this.products) {
+      const ref = doc(db, "product", product.id);
+      batch.set(ref, product);
     }
 
-    return true;
+    try {
+      await batch.commit();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   }
 
   async uploadCategory(category: string): Promise<Category | null> {

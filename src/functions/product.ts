@@ -1,22 +1,28 @@
 import { Product } from "../interfaces/product-interface";
 import FirebaseHelper from "../services/firebase-helper";
-import { categoryCollection, productCollection, subCategoryCollection } from "../settings/firebase-config";
+import {
+  categoryCollection,
+  productCollection,
+  subCategoryCollection,
+} from "../settings/firebase-config";
 import { IResponse, createResponse } from "../interfaces/response-interface";
 
 const helper = new FirebaseHelper<Product>();
 
-async function deleteAllProduct(): Promise<IResponse>{
+async function deleteAllProduct(): Promise<IResponse> {
   try {
-    const result = await helper.deleteAll(productCollection)
-    const categoryResult = await helper.deleteAll(categoryCollection)
-    const subResult = await helper.deleteAll(subCategoryCollection)
+    const result = await helper.deleteAll(productCollection);
+    const categoryResult = await helper.deleteAll(categoryCollection);
+    const subResult = await helper.deleteAll(subCategoryCollection);
 
-    const success = result && categoryResult && subResult
-    const message = success ? "Failed" : "Success" + "Delete Semua Produk"
-    return createResponse(message, success)
+    const success = result && categoryResult && subResult;
+    const message = success ? "Success" : "Failed" + "Delete Semua Produk";
+
+    console.log(`success message ${success}`);
+    return createResponse(message, success);
   } catch (error) {
-    console.log(error)
-    return createResponse("Gagal delete semua produk", false)
+    console.log(error);
+    return createResponse("Gagal delete semua produk", false);
   }
 }
 
@@ -58,8 +64,8 @@ function validateProductCreation(product: Product): {
     }
   }
 
-  for(const item of product.productItems) {
-    if(item.price <= 0){
+  for (const item of product.productItems) {
+    if (item.price <= 0) {
       console.log(`price : ${item.price}`);
       errors.push("Invalid price: must be a positive number.");
     }
@@ -96,4 +102,9 @@ async function deleteProduct(id: string) {
   return result;
 }
 
-export { createProduct, deleteProduct, validateProductCreation, deleteAllProduct };
+export {
+  createProduct,
+  deleteProduct,
+  validateProductCreation,
+  deleteAllProduct,
+};
